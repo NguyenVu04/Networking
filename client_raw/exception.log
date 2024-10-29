@@ -1,0 +1,21 @@
+java.security.DigestException: Length must be at least 20 for SHA-1digests
+java.security.DigestException: Length must be at least 20 for SHA-1digests
+java.lang.IllegalArgumentException: Missing scheme
+java.lang.IllegalArgumentException: Missing scheme
+java.lang.IllegalArgumentException: Missing scheme
+java.lang.IllegalArgumentException: Missing scheme
+java.lang.IllegalArgumentException: URI authority component has undefined host
+java.lang.IllegalArgumentException: Missing scheme
+java.io.FileNotFoundException: .\test_dir\test2\test1.txt (The system cannot find the path specified)
+java.io.FileNotFoundException: .\test_dir\test2\test2.txt (The system cannot find the path specified)
+java.io.FileNotFoundException: .\test_dir\test_2\test2.txt (The system cannot find the file specified)
+java.nio.file.NoSuchFileException: D:\Project\Java\Networking\test_dir
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short

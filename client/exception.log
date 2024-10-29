@@ -1,0 +1,12 @@
+java.lang.IllegalArgumentException: Input buffer too short
+java.io.FileNotFoundException: .\test.txt (The system cannot find the file specified)
+java.nio.file.NoSuchFileException: .\test_dir
+java.io.FileNotFoundException: .\test_dir\test_2\text2.txt (The system cannot find the path specified)
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
+java.lang.IllegalArgumentException: Input buffer too short
