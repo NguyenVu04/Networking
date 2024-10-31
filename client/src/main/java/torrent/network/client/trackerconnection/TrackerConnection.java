@@ -24,6 +24,8 @@ import torrent.network.client.torrentexception.ExceptionHandler;
 
 import java.time.Duration;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 public class TrackerConnection {
     private String peer_id;
     private long downloaded;
@@ -48,6 +50,11 @@ public class TrackerConnection {
         this.uploaded = 0;
         this.port = port;
         byte[] torrentFile = getTorrentFile(magnetText, tracker_url);
+
+        BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("D:\\Project\\torrent.torrent"));
+        out.write(torrentFile);
+        out.flush();
+        out.close();
 
         if (torrentFile == null)
             throw new Exception("Failed to get torrent file");

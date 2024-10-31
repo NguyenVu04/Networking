@@ -26,7 +26,7 @@ class TrackerApplicationTests {
 	void testGridFS() throws Exception {
 		DBObject metaData = new BasicDBObject();
 		metaData.put("user", "alex");
-		InputStream inputStream = new FileInputStream("./symbols.pdf");
+		InputStream inputStream = new FileInputStream("D:\\Project\\symbols.pdf");
 		String id = gridFsTemplate.store(inputStream, "symbols.pdf", metaData).toString();
 		GridFsResource[] resources = gridFsTemplate.getResources("symbols.pdf");
 		BufferedInputStream bis = new BufferedInputStream(resources[0].getInputStream());
