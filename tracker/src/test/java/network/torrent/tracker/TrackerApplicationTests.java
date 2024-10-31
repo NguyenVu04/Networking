@@ -26,12 +26,12 @@ class TrackerApplicationTests {
 	void testGridFS() throws Exception {
 		DBObject metaData = new BasicDBObject();
 		metaData.put("user", "alex");
-		InputStream inputStream = new FileInputStream("./exception.log");
-		String id = gridFsTemplate.store(inputStream, "exception.log", "text/plain", metaData).toString();
-		GridFsResource[] resources = gridFsTemplate.getResources("exception.log");
+		InputStream inputStream = new FileInputStream("./symbols.pdf");
+		String id = gridFsTemplate.store(inputStream, "symbols.pdf", metaData).toString();
+		GridFsResource[] resources = gridFsTemplate.getResources("symbols.pdf");
 		BufferedInputStream bis = new BufferedInputStream(resources[0].getInputStream());
 		assertNotNull(id);
-		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("./exception123.log"));
+		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("./symbols.pdf"));
 		byte[] bytes = new byte[1024];
 		int len = 0;
 		while ((len = bis.read(bytes)) != -1) {

@@ -36,7 +36,7 @@ public class TorrentBuilder {
      * connections.
      */
     private String trackerURL;
-
+    public static final int hashedPieceLength = 20;
     /**
      * Constructor for TorrentBuilder.
      * 
@@ -225,7 +225,7 @@ public class TorrentBuilder {
         HashMap<Object, Object> torrent = new HashMap<>();
 
         HashMap<Object, Object> info = new HashMap<>();
-        info.put("piece length", TorrentBuilder.pieceSize);
+        info.put("piece_length", TorrentBuilder.pieceSize);
         info.put("pieces", pieces);
 
         File file = new File(filePath);

@@ -29,7 +29,7 @@ public class HttpController {
     /**
      * Interval between requests in seconds.
      */
-    public static final int interval = 5;
+    public static final int interval = 10;
 
     /**
      * {@link EventHandler} for handling events.
@@ -82,7 +82,7 @@ public class HttpController {
             @RequestParam(name = "event") String event,
             @RequestParam(name = "compact") Integer compact,
             @RequestParam(name = "no_peer_id") Integer noPeerId,
-            @RequestParam(name = "trackerid", required = false) String trackerId,
+            @RequestParam(name = "tracker_id", required = false) String trackerId,
             @RequestParam(name = "ip") String ip) {
 
         // Create a new instance of Bencode for encoding the response
@@ -147,7 +147,7 @@ public class HttpController {
                 for (SessionDocument session : sessions) {
                     Map<Object, Object> peer = new HashMap<>();
                     if (noPeerId.intValue() != 1)
-                        peer.put("peer id", session.getPeerId());
+                        peer.put("peer_id", session.getPeerId());
                     peer.put("ip", session.getIp());
                     peer.put("port", session.getPort());
 
@@ -163,9 +163,9 @@ public class HttpController {
                 md.update(id.getBytes());
                 String hashedId = new String(md.digest()); // ! ARE YOU SURE THIS IS A GOOD IDEA!!!!!
 
-                map.put("tracker id", hashedId);
+                map.put("tracker_id", hashedId);
             } else {
-                map.put("tracker id", trackerId);
+                map.put("tracker_id", trackerId);
             }
 
             // Encode the response map using Bencode and return it

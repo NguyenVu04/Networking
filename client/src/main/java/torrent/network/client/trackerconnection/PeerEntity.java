@@ -1,0 +1,38 @@
+package torrent.network.client.trackerconnection;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
+import torrent.network.client.torrentexception.ExceptionHandler;
+
+public class PeerEntity {
+    private String peer_id;
+    private int port;
+    private String ip;
+
+    public PeerEntity(String peerId, int port, String ip) {
+        this.peer_id = peerId;
+        this.port = port;
+        this.ip = ip;
+    }
+    public String getPeerId() {
+        return peer_id;
+    }
+    public int getPort() {
+        return port;
+    }
+    public String getIp() {
+        return ip;
+    }
+
+    public static PeerEntity from(Object peer) {
+        try {
+            Gson gson = new Gson();
+            JsonElement jsonElement = gson.toJsonTree(peer);
+            return gson.fromJson(jsonElement, PeerEntity.class);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(e);
+        }
+        return null;
+    }
+}

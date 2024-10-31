@@ -1,16 +1,27 @@
 package torrent.network.client;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.dampcake.bencode.Bencode;
+import com.dampcake.bencode.Type;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
 import torrent.network.client.torrentbuilder.TorrentBuilder;
 import torrent.network.client.torrentdigest.TorrentDigest;
-import java.security.MessageDigest;
+import torrent.network.client.torrentexception.ExceptionHandler;
+import torrent.network.client.trackerconnection.TrackerConnection;
 
+import java.security.MessageDigest;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
+import java.util.List;
+import java.util.ArrayList;
 @SpringBootTest
 class ClientApplicationTests {
 	@Test
@@ -67,4 +78,72 @@ class ClientApplicationTests {
 		assertTrue(!result);
 	}
 
+	@Test
+	public void testObjectParse() {
+		// SingleFileInfo info = new SingleFileInfo("aaaa", 10, 10, "aaaa");
+		// Map<String, Object> infoMap = new HashMap<>();
+		// infoMap.put("name", info.getName());
+		// infoMap.put("length", info.getLength());
+		// infoMap.put("piece length", info.getPieceLength());
+		// infoMap.put("pieces", info.getPieces());
+		
+		// TorrentEntity entity = new TorrentEntity(infoMap, "ggggg");
+
+		// Map<String, Object> map = new HashMap<>();
+		// map.put("announce", entity.getAnnounce());
+		// map.put("info", entity.getInfo());
+
+		// Bencode bencode = new Bencode();
+		// byte[] torrent = bencode.encode(map);
+
+		// Map<String, Object> torrentMap = bencode.decode(torrent, Type.DICTIONARY);
+
+		// TorrentEntity torrentEntity = TorrentEntity.from(torrentMap);
+		// System.err.println(torrentEntity.getAnnounce());
+		// assertNotNull(torrentEntity);
+
+		List<List<String>> paths = new ArrayList<>();
+		paths.add(new ArrayList<String>());
+		paths.add(new ArrayList<String>());
+		paths.add(new ArrayList<String>());
+		paths.get(0).add("test");
+		paths.get(1).add("test");
+		paths.get(2).add("test");
+
+		Bencode bencode = new Bencode();
+		byte[] torrent = bencode.encode(paths);
+		
+		List<Object> decoded = bencode.decode(torrent, Type.LIST);
+
+		Gson gson = new Gson();
+		JsonElement jsonElement = gson.toJsonTree(decoded);
+
+		Object[][] array = gson.fromJson(jsonElement, Object[][].class);
+
+		for (Object[] objects : array) {
+			for (Object object : objects) {
+				System.err.println(object);
+			}
+		}
+	}
+
+	@Test
+	public void testGetTorrentFile() throws Exception {
+		TrackerConnection connection = new TrackerConnection("symbols.pdf", "127.0.0.1:8080", 9000);
+		assertTrue(connection.isAlive());
+	}
+
+	@Test
+	public void testSendTorrentFile() throws Exception {
+		String result = TrackerConnection.sendTorrentFile("D:\\Project\\symbols.pdf", "http://127.0.0.1:8080");
+		System.err.println(result);
+		assertNotNull(result);
+	}
+
+	@Test
+	public void getSendTorrentFile() throws Exception {
+		TrackerConnection result = new TrackerConnection("84a2771d52b9269690be3217a35b5b3c9b1aaa4bf35143ba47ecde26948d07b5", "http://127.0.0.1:8080", 9000);
+		//result.aliveThread.join();
+		assertTrue(result.isAlive());		
+	}
 }

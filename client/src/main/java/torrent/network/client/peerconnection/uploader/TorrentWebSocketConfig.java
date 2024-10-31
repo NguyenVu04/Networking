@@ -8,11 +8,10 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @Configuration
 @EnableWebSocket
 public class TorrentWebSocketConfig implements WebSocketConfigurer {
-
+    
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(new TorrentWebSocketHandler(), "/")
                 .setAllowedOrigins("*");
-                //.addInterceptors(torrentHandshakeInterceptor());
     }
 }

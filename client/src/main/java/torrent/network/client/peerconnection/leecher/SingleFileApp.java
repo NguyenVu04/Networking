@@ -1,5 +1,5 @@
 package torrent.network.client.peerconnection.leecher;
 
-public class App {
+public class SingleFileApp {
 
 }

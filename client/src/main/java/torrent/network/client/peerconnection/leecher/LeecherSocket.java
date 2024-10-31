@@ -5,6 +5,7 @@ import java.net.http.WebSocket;
 import java.nio.ByteBuffer;
 import java.util.concurrent.CompletableFuture;
 
+import torrent.network.client.connectionmanager.ConnectionManager;
 import torrent.network.client.peerconnection.PeerMessage;
 import torrent.network.client.torrentexception.ExceptionHandler;
 
@@ -16,6 +17,35 @@ public class LeecherSocket {
     private boolean amInterested;
     private boolean peerChoking;
     private boolean peerInterested;
+    private Thread aliveThread;
+    private ConnectionManager manager;
+
+    public void addHavingPiece(int index) throws Exception {
+        this.manager.addHavingPiece(index, this);
+    }
+
+    public byte[] getInfoHash() {
+        return this.manager.getInfoHash();
+    }
+
+    public boolean verifyPiece(byte[] piece, int index) {
+        try {
+            return this.manager.verifyPiece(piece, index);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(e);
+        }
+        return false;
+    }
+
+    public boolean isAlive() {
+        return !this.socket.isInputClosed() && !this.socket.isOutputClosed();
+    }
+
+    public void close() {
+        this.socket.sendClose(1000, "close");
+        this.socket.abort();
+    }
+
     public WebSocket getSocket() {
         return socket;
     }
@@ -38,31 +68,35 @@ public class LeecherSocket {
 
     public static final String pstr = "BitTorrent protocol";
 
-    protected LeecherSocket() {
-    }
-
-    public static LeecherSocket create(String ip, boolean ssl, byte[] infoHash, byte[] peerId) {
+    public LeecherSocket(ConnectionManager manager, String ip, boolean ssl, byte[] infoHash, byte[] peerId, boolean sendHandShake) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
 
         CompletableFuture<WebSocket> future = client.newWebSocketBuilder()
-                .buildAsync(URI.create("ws" + (ssl ? "s" : "") + "://" + ip), new LeecherListener());
+                .buildAsync(URI.create("ws" + (ssl ? "s" : "") + "://" + ip), new LeecherListener(this));
 
-        LeecherSocket socket = new LeecherSocket();
-        try {
-            socket.socket = future.get();
+        this.socket = future.get();
+        if (sendHandShake)
+            this.sendHandShake(infoHash, peerId);
+        this.amChoking = true;
+        this.amInterested = false;
+        this.peerChoking = true;
+        this.peerInterested = false;
 
-            socket.sendHandShake(infoHash, peerId);
+        this.manager = manager;
 
-            socket.amChoking = true;
-            socket.amInterested = false;
-            socket.peerChoking = true;
-            socket.peerInterested = false;
+        this.aliveThread = new Thread(() -> {
+            while (!socket.isInputClosed() && !socket.isOutputClosed()) {
+                try {
+                    Thread.sleep(2000);//TODO: Config timeout
+                    sendKeepAlive();
+                } catch (Exception e) {
+                    socket.abort();
+                    ExceptionHandler.handleException(e);
+                }
+            }
+        });
 
-            return socket;
-        } catch (Exception e) {
-            ExceptionHandler.handleException(e);
-        }
-        return null;
+        this.aliveThread.start();
     }
 
     private void sendHandShake(byte[] infoHash, byte[] peerId) {
