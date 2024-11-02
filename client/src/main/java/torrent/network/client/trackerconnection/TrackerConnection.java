@@ -17,15 +17,12 @@ import com.dampcake.bencode.Bencode;
 import com.dampcake.bencode.Type;
 
 import torrent.network.client.torrentbuilder.TorrentBuilder;
-import torrent.network.client.torrententity.MultiFileInfo;
 import torrent.network.client.torrententity.SingleFileInfo;
 import torrent.network.client.torrententity.TorrentEntity;
 import torrent.network.client.torrentexception.ExceptionHandler;
 
 import java.time.Duration;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
 public class TrackerConnection {
     private String peer_id;
     private long downloaded;
@@ -33,13 +30,13 @@ public class TrackerConnection {
     private long uploaded;
     private int port;
     private byte[] infoHash;
+    private byte[] infoPieces;
     private String tracker_url;
     private List<PeerEntity> peers;
     public static final String torrentPath = "torrent";
     private Thread aliveThread;
     private boolean alive;
     private int interval;
-    private MultiFileInfo multiFileInfo;
     private SingleFileInfo singleFileInfo;
 
     public TrackerConnection(String magnetText, String tracker_url, int port) throws Exception {
@@ -51,11 +48,6 @@ public class TrackerConnection {
         this.port = port;
         byte[] torrentFile = getTorrentFile(magnetText, tracker_url);
 
-        BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("D:\\Project\\torrent.torrent"));
-        out.write(torrentFile);
-        out.flush();
-        out.close();
-
         if (torrentFile == null)
             throw new Exception("Failed to get torrent file");
 
@@ -63,16 +55,14 @@ public class TrackerConnection {
 
         TorrentEntity torrentEntity = TorrentEntity.from(torrent);
 
-        multiFileInfo = torrentEntity.getMultiFileInfo();
         singleFileInfo = torrentEntity.getSingleFileInfo();
-        if (multiFileInfo == null && singleFileInfo == null)
-            throw new Exception("Invalid torrent file");
         
-        this.left = multiFileInfo != null ? multiFileInfo.getSize() : singleFileInfo.getSize();
+        this.left = singleFileInfo.getLength();
 
         this.tracker_url = torrentEntity.getAnnounce();
 
-        this.infoHash = torrentEntity.getInfoHash();
+        this.infoPieces = torrentEntity.getInfo();
+        this.infoHash = TorrentEntity.getInfoHash(this.infoPieces);
 
         TrackerResponse response = this.getTrackerResponse("started");
 
@@ -297,33 +287,15 @@ public class TrackerConnection {
         return null;
     }
 
-    public boolean verifyPiece(byte[] piece, int index) throws Exception {
-        boolean result;
-        if (this.singleFileInfo != null) {
-            result = this.singleFileInfo.verifyPiece(piece, index);
-
-        } else if (this.multiFileInfo != null) {
-            result = this.multiFileInfo.verifyPiece(piece, index);
-
-        } else {
-            throw new Exception("No torrent file found");
-
-        }
-        if (result) {
-            this.downloaded += TorrentBuilder.pieceSize;
-            
-            if (this.left > 0) {
-                this.left -= TorrentBuilder.pieceSize;
-
-                if (left == 0)
-                    this.sendCompletedEvent();
-            }
-        }
-
-        return result;
-    }
-
     public byte[] getInfoHash() {
         return infoHash;
+    }
+
+    public byte[] getInfo() {
+        return this.infoPieces;
+    }
+
+    public int getNumberOfPieces() {
+        return this.singleFileInfo.getNumberOfPieces();
     }
 }

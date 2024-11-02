@@ -2,12 +2,14 @@ package torrent.network.client.peerconnection;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
-import torrent.network.client.peerconnection.leecher.LeecherSocket;
+
+import torrent.network.client.torrentbuilder.TorrentBuilder;
 
 /**
  * Class used to create the messages sent to the peer.
  */
 public class PeerMessage {
+    public static final String pstr = "BitTorrent protocol";
 
     protected PeerMessage() {}
 
@@ -18,10 +20,11 @@ public class PeerMessage {
      * @return The handshake message as a byte array.
      */
     public static byte[] createHandshakeMessage(byte[] infoHash, byte[] peerId) {
-        ByteBuffer buffer = ByteBuffer.allocate(49 + LeecherSocket.pstr.length());
+        ByteBuffer buffer = ByteBuffer.allocate(9 + TorrentBuilder.hashedPieceLength * 2 + PeerMessage.pstr.length());
 
-        buffer.put((byte) LeecherSocket.pstr.length());
-        buffer.put(LeecherSocket.pstr.getBytes());
+        buffer.put((byte) PeerMessage.pstr.length());
+        buffer.put(PeerMessage.pstr.getBytes());
+        buffer.put(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 });
         buffer.put(infoHash);
         buffer.put(peerId);
 
@@ -196,13 +199,24 @@ public class PeerMessage {
     }
 
     public static MessageType getMessageType(byte[] message) {
-        if (message[0] == LeecherSocket.pstr.length()) return MessageType.HANDSHAKE;
+        if (message[0] == PeerMessage.pstr.length()) return MessageType.HANDSHAKE;
         if (message.length < 5) return MessageType.KEEP_ALIVE;
-        return MessageType.values()[message[4] + 1];
+        return MessageType.values()[message[4] + 2];
     }
 
     public static byte[] getPayload(byte[] message) {
         if (message.length < 5) return null;
         return Arrays.copyOfRange(message, 5, message.length);
+    }
+
+    public static byte[] getInfoHash(byte[] message) throws Exception {
+        MessageType messageType = getMessageType(message);
+
+        if (messageType != MessageType.HANDSHAKE)
+            throw new IllegalArgumentException("Expected handshake message");
+
+        return Arrays.copyOfRange(message, 
+            PeerMessage.pstr.length() + 9 + PeerMessage.pstr.length(), 
+            PeerMessage.pstr.length() + 9 + TorrentBuilder.hashedPieceLength + PeerMessage.pstr.length());
     }
 }

@@ -56,13 +56,12 @@ public class TorrentBuilder {
     private byte[] generateFilePieces(String filePath) {
         try (BufferedInputStream stream = new BufferedInputStream(new FileInputStream(filePath))) {
             ByteBuffer byteBuffer = ByteBuffer.allocate(0);
-            byte[] buffer = new byte[TorrentBuilder.pieceSize];
-            int bytesRead = 0;
-            while ((bytesRead = stream.read(buffer, 0, buffer.length)) != -1) {
+            byte[] buffer;
+            
+            while ((buffer = stream.readNBytes(TorrentBuilder.pieceSize)).length > 0) {
 
                 MessageDigest md = MessageDigest.getInstance(TorrentBuilder.HASH_ALGORITHM);
-                md.update(buffer, 0, bytesRead);
-                byte[] hashedBuffer = md.digest();
+                byte[] hashedBuffer = md.digest(buffer);
 
                 ByteBuffer tmpBuffer = ByteBuffer.allocate(byteBuffer.capacity() + hashedBuffer.length);
                 tmpBuffer.put(byteBuffer.array());

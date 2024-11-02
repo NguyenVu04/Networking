@@ -1,3 +1,6 @@
 java.lang.Exception
 java.lang.IllegalArgumentException: Invalid event type
 java.io.FileNotFoundException: GridFs resource [magnettext] does not exist.
+java.io.FileNotFoundException: GridFs resource [cdbchdbcbdhcbhd] does not exist.
+java.io.FileNotFoundException: GridFs resource [cdbchdbcbdhcbhd] does not exist.
+java.io.FileNotFoundException: GridFs resource [cdbchdbcbdhcbhd] does not exist.

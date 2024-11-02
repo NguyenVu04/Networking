@@ -4,14 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import torrent.network.client.torrentbuilder.TorrentBuilder;
-import torrent.network.client.torrentdigest.TorrentDigest;
 import torrent.network.client.torrentexception.ExceptionHandler;
 
 public class SingleFileInfo {
     private String name;
     private int length;
     private int piece_length;
-    private byte[] pieces;
+    private String pieces;
 
     protected SingleFileInfo() {}
 
@@ -28,7 +27,7 @@ public class SingleFileInfo {
     }
 
     public byte[] getPieces() {
-        return this.pieces;
+        return this.pieces.getBytes();
     }
 
     public static SingleFileInfo from(Object info) {
@@ -45,12 +44,7 @@ public class SingleFileInfo {
         return null;
     }
 
-    public boolean verifyPiece(byte[] piece, int index) {
-        TorrentDigest td = new TorrentDigest(this.pieces);
-        return td.verify(piece, index);
-    }
-
-    public long getSize() {
-        return this.pieces.length / TorrentBuilder.hashedPieceLength * TorrentBuilder.pieceSize;
+    public int getNumberOfPieces() {
+        return this.length / TorrentBuilder.pieceSize;
     }
 }

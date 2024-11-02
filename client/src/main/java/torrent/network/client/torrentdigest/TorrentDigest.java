@@ -15,8 +15,7 @@ public class TorrentDigest {
     public boolean verify(byte[] input, int index) {
         try {
             MessageDigest md = MessageDigest.getInstance(TorrentBuilder.HASH_ALGORITHM);
-            md.update(input, 0, TorrentBuilder.pieceSize);
-            byte[] hashedInput = md.digest();
+            byte[] hashedInput = md.digest(input);
 
             ByteBuffer byteBuffer = ByteBuffer.wrap(hashedBuffer, index * md.getDigestLength(), md.getDigestLength());
             return byteBuffer.equals(ByteBuffer.wrap(hashedInput));
