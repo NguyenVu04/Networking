@@ -9,7 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 import com.dampcake.bencode.Bencode;
@@ -37,12 +39,14 @@ public class TorrentBuilder {
      */
     private String trackerURL;
     public static final int hashedPieceLength = 20;
+
     /**
      * Constructor for TorrentBuilder.
      * 
-     * @param pieceSize Size of each piece in bytes.
-     * @param trackerURL URL of the tracker. This is the url where the tracker will be
-     *        listening for connections.
+     * @param pieceSize  Size of each piece in bytes.
+     * @param trackerURL URL of the tracker. This is the url where the tracker will
+     *                   be
+     *                   listening for connections.
      */
     public TorrentBuilder(String trackerURL) {
         this.trackerURL = trackerURL;
@@ -50,6 +54,7 @@ public class TorrentBuilder {
 
     /**
      * Generates the piece string for a single file.
+     * 
      * @param filePath Path of the file to generate the piece string for.
      * @return The piece string for the file.
      */
@@ -57,7 +62,7 @@ public class TorrentBuilder {
         try (BufferedInputStream stream = new BufferedInputStream(new FileInputStream(filePath))) {
             ByteBuffer byteBuffer = ByteBuffer.allocate(0);
             byte[] buffer;
-            
+
             while ((buffer = stream.readNBytes(TorrentBuilder.pieceSize)).length > 0) {
 
                 MessageDigest md = MessageDigest.getInstance(TorrentBuilder.HASH_ALGORITHM);
@@ -81,6 +86,7 @@ public class TorrentBuilder {
 
     /**
      * Generates the piece string for a directory.
+     * 
      * @param rootDirPath Path of the directory to generate the piece string for.
      * @return The piece string for the directory.
      */
@@ -128,6 +134,7 @@ public class TorrentBuilder {
 
     /**
      * Gets a list of all the files in a directory and their sizes.
+     * 
      * @param rootDirPath Path of the directory to get the files from.
      * @return A list of all the files in the directory and their sizes.
      */
@@ -142,12 +149,12 @@ public class TorrentBuilder {
                     files.add(Map.entry(file.getPath(), Long.valueOf(file.length())));
                 } else {
                     List<Map.Entry<String, Long>> subFiles = getFiles(file.getPath());
-                    
+
                     if (subFiles == null)
                         return null;
 
                     files.addAll(subFiles);
-                }   
+                }
             }
             return files;
         } catch (Exception e) {
@@ -158,6 +165,7 @@ public class TorrentBuilder {
 
     /**
      * Generates a .torrent file for a directory.
+     * 
      * @param rootDirPath Path of the directory to generate the .torrent file for.
      * @return The .torrent file for the directory.
      */
@@ -213,6 +221,7 @@ public class TorrentBuilder {
 
     /**
      * Generates a .torrent file for a single file.
+     * 
      * @param filePath Path of the file to generate the .torrent file for.
      * @return The .torrent file for the file.
      */
@@ -225,7 +234,9 @@ public class TorrentBuilder {
 
         HashMap<Object, Object> info = new HashMap<>();
         info.put("piece_length", TorrentBuilder.pieceSize);
-        info.put("pieces", pieces);
+
+        String encodedPieces = HexFormat.of().formatHex(pieces);//TODO:
+        info.put("pieces", encodedPieces);
 
         File file = new File(filePath);
         info.put("name", file.getName());

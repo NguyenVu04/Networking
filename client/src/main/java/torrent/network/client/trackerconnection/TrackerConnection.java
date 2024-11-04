@@ -1,10 +1,14 @@
 package torrent.network.client.trackerconnection;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.net.InetAddress;
-import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.Date;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -16,6 +20,8 @@ import org.springframework.web.client.RestClient;
 import com.dampcake.bencode.Bencode;
 import com.dampcake.bencode.Type;
 
+import torrent.network.client.peerconnection.leecher.LeecherController;
+import torrent.network.client.peerconnection.uploader.SingleFileApp;
 import torrent.network.client.torrentbuilder.TorrentBuilder;
 import torrent.network.client.torrententity.SingleFileInfo;
 import torrent.network.client.torrententity.TorrentEntity;
@@ -24,14 +30,14 @@ import torrent.network.client.torrentexception.ExceptionHandler;
 import java.time.Duration;
 
 public class TrackerConnection {
-    private String peer_id;
+    private byte[] peerId;
     private long downloaded;
     private long left;
     private long uploaded;
     private int port;
     private byte[] infoHash;
     private byte[] infoPieces;
-    private String tracker_url;
+    private String trackerUrl;
     private List<PeerEntity> peers;
     public static final String torrentPath = "torrent";
     private Thread aliveThread;
@@ -39,9 +45,9 @@ public class TrackerConnection {
     private int interval;
     private SingleFileInfo singleFileInfo;
 
-    public TrackerConnection(String magnetText, String tracker_url, int port) throws Exception {
+    public TrackerConnection(String magnetText, String tracker_url, int port, String path) throws Exception {
         Bencode bencode = new Bencode();
-        this.peer_id = null;
+        this.peerId = null;
         this.peers = new CopyOnWriteArrayList<>();
         this.downloaded = 0;
         this.uploaded = 0;
@@ -56,30 +62,119 @@ public class TrackerConnection {
         TorrentEntity torrentEntity = TorrentEntity.from(torrent);
 
         singleFileInfo = torrentEntity.getSingleFileInfo();
-        
+
         this.left = singleFileInfo.getLength();
 
-        this.tracker_url = torrentEntity.getAnnounce();
-
+        this.trackerUrl = torrentEntity.getAnnounce();
         this.infoPieces = torrentEntity.getInfo();
         this.infoHash = TorrentEntity.getInfoHash(this.infoPieces);
+
+        String encodedInfoHash = TrackerConnection.getEncodedInfoHash(this.infoHash);
+        String ip = InetAddress.getLocalHost().getHostAddress();
+        MessageDigest md = MessageDigest.getInstance(TorrentBuilder.HASH_ALGORITHM);
+        Date now = new Date();
+        this.peerId = md.digest((now.toString() + ip + encodedInfoHash).getBytes(StandardCharsets.UTF_8));
 
         TrackerResponse response = this.getTrackerResponse("started");
 
         List<PeerEntity> peerList = response.getPeers();
         synchronized (this) {
-            this.peers.clear();
             this.peers.addAll(peerList);
         }
+
+        SingleFileApp.serveFile(path, encodedInfoHash, this.getNumberOfPieces());
+        List<Integer> indexLeft = SingleFileApp.getIndexOfPiecesLeft(encodedInfoHash);
+        this.left = indexLeft.size() * TorrentBuilder.pieceSize;
 
         this.interval = response.getInterval();
         this.alive = true;
         this.aliveThread = new Thread(() -> {
             while (this.alive) {
-                this.sendAliveEvent();
+                try {
+                    Thread.sleep(Duration.ofSeconds(this.interval));
+                    if (SingleFileApp.isDone(encodedInfoHash)) {
+                        this.sendCompletedEvent();
+                    } else {
+                        this.sendAliveEvent();
+                        LeecherController.createLeecherController(
+                                this.infoPieces,
+                                this.infoHash,
+                                this.peerId,
+                                this.peers,
+                                indexLeft);
+                    }
+                } catch (Exception e) {
+                    ExceptionHandler.handleException(e);
+                    this.alive = false;
+                }
             }
+        });
+        this.aliveThread.start();
+    }
 
-            this.sendStoppedEvent();
+    public TrackerConnection(int port, String path) throws Exception {
+        Bencode bencode = new Bencode();
+        this.peerId = null;
+        this.peers = new CopyOnWriteArrayList<>();
+        this.downloaded = 0;
+        this.uploaded = 0;
+        this.port = port;
+
+        BufferedInputStream stream = new BufferedInputStream(new FileInputStream(path));
+        byte[]torrentFile = stream.readAllBytes();
+        stream.close();
+        
+        Map<String, Object> torrent = bencode.decode(torrentFile, Type.DICTIONARY);
+
+        TorrentEntity torrentEntity = TorrentEntity.from(torrent);
+
+        singleFileInfo = torrentEntity.getSingleFileInfo();
+
+        this.left = singleFileInfo.getLength();
+
+        this.trackerUrl = torrentEntity.getAnnounce();
+        this.infoPieces = torrentEntity.getInfo();
+        this.infoHash = TorrentEntity.getInfoHash(this.infoPieces);
+
+        String encodedInfoHash = TrackerConnection.getEncodedInfoHash(this.infoHash);
+        String ip = InetAddress.getLocalHost().getHostAddress();
+        MessageDigest md = MessageDigest.getInstance(TorrentBuilder.HASH_ALGORITHM);
+        Date now = new Date();
+        this.peerId = md.digest((now.toString() + ip + encodedInfoHash).getBytes(StandardCharsets.UTF_8));
+
+        TrackerResponse response = this.getTrackerResponse("started");
+
+        List<PeerEntity> peerList = response.getPeers();
+        synchronized (this) {
+            this.peers.addAll(peerList);
+        }
+
+        SingleFileApp.serveFile(path, encodedInfoHash, this.getNumberOfPieces());
+        List<Integer> indexLeft = SingleFileApp.getIndexOfPiecesLeft(encodedInfoHash);
+        this.left = indexLeft.size() * TorrentBuilder.pieceSize;
+
+        this.interval = response.getInterval();
+        this.alive = true;
+        this.aliveThread = new Thread(() -> {
+            while (this.alive) {
+                try {
+                    Thread.sleep(Duration.ofSeconds(this.interval));
+                    if (SingleFileApp.isDone(encodedInfoHash)) {
+                        this.sendCompletedEvent();
+                    } else {
+                        this.sendAliveEvent();
+                        LeecherController.createLeecherController(
+                                this.infoPieces,
+                                this.infoHash,
+                                this.peerId,
+                                this.peers,
+                                indexLeft);
+                    }
+                } catch (Exception e) {
+                    ExceptionHandler.handleException(e);
+                    this.alive = false;
+                }
+            }
         });
         this.aliveThread.start();
     }
@@ -108,14 +203,14 @@ public class TrackerConnection {
         this.uploaded = uploaded;
     }
 
-    public String getPeerId() {
-        return this.peer_id;
+    public byte[] getPeerId() {
+        return this.peerId;
     }
 
-    private byte[] getTorrentFile(String magnetText, String tracker_url) {
+    private byte[] getTorrentFile(String magnetText, String trackerUrl) {
         try {
             RestClient response = RestClient.builder()
-                    .baseUrl(tracker_url)
+                    .baseUrl(trackerUrl)
                     .build();
 
             ResponseEntity<byte[]> result = response.get()
@@ -136,24 +231,16 @@ public class TrackerConnection {
     private TrackerResponse getTrackerResponse(String event) {
         try {
             RestClient request = RestClient.builder()
-                    .baseUrl(this.tracker_url)
+                    .baseUrl(this.trackerUrl)
                     .build();
 
             String ip = InetAddress.getLocalHost().getHostAddress();
-
-            if (peer_id == null) {
-                MessageDigest md = MessageDigest.getInstance(TorrentBuilder.HASH_ALGORITHM);
-                Date now = new Date();
-
-                this.peer_id = new String(md.digest((now.toString() + ip + infoHash).getBytes()));
-
-            }
-
-            String encodedInfoHash = URLEncoder.encode(new String(this.infoHash), "UTF-8");
+            String encodedInfoHash = HexFormat.of().formatHex(this.infoHash);// TODO:
+            String encodedPeerId = HexFormat.of().formatHex(this.peerId);// TODO:
 
             ResponseEntity<byte[]> response = request.get()
                     .uri(uriBuilder -> uriBuilder.queryParam("info_hash", encodedInfoHash)
-                            .queryParam("peer_id", this.peer_id)
+                            .queryParam("peer_id", encodedPeerId)
                             .queryParam("port", this.port)
                             .queryParam("downloaded", this.downloaded)
                             .queryParam("left", this.left)
@@ -181,34 +268,19 @@ public class TrackerConnection {
 
     public void sendCompletedEvent() {
         try {
-            TrackerResponse res = this.getTrackerResponse("completed");
 
-            if (res != null) {
-                synchronized (this) {
-                    this.peers.clear();
-                    this.peers.addAll(res.getPeers());
-                }
-            } else {
-                throw new Exception("Failed to send completed event");
-            }
+            this.getTrackerResponse("completed");
+
         } catch (Exception e) {
-            this.aliveThread.interrupt();
             alive = false;
             ExceptionHandler.handleException(e);
-
-            synchronized (this) {
-                this.peers.clear();
-            }
+            this.peers.clear();
         }
     }
 
     public void sendStoppedEvent() {
-        synchronized (this) {
-            this.peers.clear();
-        }
-        this.aliveThread.interrupt();
         alive = false;
-
+        this.peers.clear();
         try {
             this.getTrackerResponse("stopped");
         } catch (Exception e) {
@@ -218,26 +290,15 @@ public class TrackerConnection {
 
     public void sendAliveEvent() {
         try {
-            Thread.sleep(Duration.ofSeconds(this.interval));
-
             TrackerResponse res = this.getTrackerResponse("alive");
 
-            if (res != null) {
+            this.peers.clear();
+            this.peers.addAll(res.getPeers());
 
-                synchronized (this) {
-                    this.peers.clear();
-                    this.peers.addAll(res.getPeers());
-                }
-
-            } else {
-                throw new Exception("Failed to send alive event");
-            }
         } catch (Exception e) {
-            ExceptionHandler.handleException(e);
             alive = false;
-            synchronized (this) {
-                this.peers.clear();
-            }
+            this.peers.clear();
+            ExceptionHandler.handleException(e);
         }
     }
 
@@ -249,17 +310,17 @@ public class TrackerConnection {
         return this.alive;
     }
 
-    public static String sendTorrentFile(String path, String tracker_url) {
+    public static String sendTorrentFile(String path, String trackerUrl) {
         try {
             Path filePath = Path.of(path);
 
             byte[] data;
 
             if (filePath.toFile().isFile()) {
-                data = new TorrentBuilder(tracker_url)
+                data = new TorrentBuilder(trackerUrl)
                         .generateSingleFileTorrent(path);
             } else {
-                data = new TorrentBuilder(tracker_url)
+                data = new TorrentBuilder(trackerUrl)
                         .generateMultiFileTorrent(path);
             }
 
@@ -267,7 +328,7 @@ public class TrackerConnection {
                 throw new Exception("Failed to generate torrent file");
 
             RestClient request = RestClient.builder()
-                    .baseUrl(tracker_url)
+                    .baseUrl(trackerUrl)
                     .build();
 
             ResponseEntity<String> res = request.post()
@@ -288,7 +349,7 @@ public class TrackerConnection {
     }
 
     public byte[] getInfoHash() {
-        return infoHash;
+        return this.infoHash;
     }
 
     public byte[] getInfo() {
@@ -297,5 +358,42 @@ public class TrackerConnection {
 
     public int getNumberOfPieces() {
         return this.singleFileInfo.getNumberOfPieces();
+    }
+
+    public boolean peerInSwarm(byte[] infoHash, byte[] peerId) {
+        String encodedInfoHash = HexFormat.of().formatHex(infoHash);// TODO:
+        String encodedPeerId = HexFormat.of().formatHex(peerId);// TODO:
+
+        RestClient client = RestClient.create(this.trackerUrl);
+
+        ResponseEntity<Boolean> response = client.get()
+                .uri(uriBuilder -> uriBuilder.path("peer")
+                        .queryParam("info_hash", encodedInfoHash)
+                        .queryParam("peer_id", encodedPeerId)
+                        .build())
+                .retrieve()
+                .toEntity(Boolean.class);
+
+        return response.getBody();
+    }
+
+    public String getTrackerUrl() {
+        return this.trackerUrl;
+    }
+
+    public void increaseDownloaded() {
+        this.downloaded += TorrentBuilder.pieceSize;
+    }
+
+    public void increaseUploaded() {
+        this.uploaded += TorrentBuilder.pieceSize;
+    }
+
+    public byte[] getPieces() {
+        return this.infoPieces;
+    }
+
+    public static String getEncodedInfoHash(byte[] infoHash) {
+        return HexFormat.of().formatHex(infoHash);// TODO:
     }
 }

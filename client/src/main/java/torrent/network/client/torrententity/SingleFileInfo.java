@@ -1,5 +1,9 @@
 package torrent.network.client.torrententity;
 
+import java.util.Base64;
+import java.util.HexFormat;
+import java.util.Map;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
@@ -12,7 +16,8 @@ public class SingleFileInfo {
     private int piece_length;
     private String pieces;
 
-    protected SingleFileInfo() {}
+    protected SingleFileInfo() {
+    }
 
     public String getName() {
         return name;
@@ -27,16 +32,16 @@ public class SingleFileInfo {
     }
 
     public byte[] getPieces() {
-        return this.pieces.getBytes();
+        return HexFormat.of().parseHex(this.pieces);//TODO:
     }
 
-    public static SingleFileInfo from(Object info) {
+    public static SingleFileInfo from(Map<String, Object> info) {
         try {
             Gson gson = new Gson();
-    
+
             JsonElement jsonElement = gson.toJsonTree(info);
             return gson.fromJson(jsonElement, SingleFileInfo.class);
-            
+
         } catch (Exception e) {
             ExceptionHandler.handleException(e);
         }
@@ -45,6 +50,6 @@ public class SingleFileInfo {
     }
 
     public int getNumberOfPieces() {
-        return this.length / TorrentBuilder.pieceSize;
+        return this.length / TorrentBuilder.pieceSize + 1;
     }
 }

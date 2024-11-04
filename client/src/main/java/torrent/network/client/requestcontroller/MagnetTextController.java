@@ -3,42 +3,124 @@ package torrent.network.client.requestcontroller;
 import org.springframework.web.bind.annotation.RestController;
 
 import torrent.network.client.connectionmanager.ConnectionManager;
-import torrent.network.client.peerconnection.uploader.UploaderSocketController;
+import torrent.network.client.torrentbuilder.TorrentBuilder;
 import torrent.network.client.torrentexception.ExceptionHandler;
 import torrent.network.client.trackerconnection.TrackerConnection;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 @RestController
 public class MagnetTextController {
+    @Autowired
+    private ServletWebServerApplicationContext webServerAppCtxt;
+    public static final String trackerUrl = "http://localhost:8080";// ! CHANGE LATER
 
     @GetMapping("/magnet_text")
     public ResponseEntity<Object> getFileByMagnetText(
             @RequestParam(name = "magnet_text") String magnetText,
-            @RequestParam(name = "tracker_url") String tracker_url) {
+            @RequestParam(name = "path") String path) {
 
         try {
-            ConnectionManager.createTrackerConnection(magnetText,
-                    tracker_url,
-                    UploaderSocketController.getPort());
-            return ResponseEntity.ok(magnetText);
+            TrackerConnection connection = ConnectionManager.createTrackerConnetion(
+                    magnetText,
+                    trackerUrl,
+                    webServerAppCtxt.getWebServer().getPort(),
+                    path);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("magnet_text", magnetText);
+            map.put("peers", connection.getPeers());
+            return ResponseEntity.ok(map);
         } catch (Exception e) {
             ExceptionHandler.handleException(e);
         }
 
-        return ResponseEntity.internalServerError().build();
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/magnet_text")
-    public ResponseEntity<Object> postMethodName(@RequestParam(name = "path") String path) {
-        String result = TrackerConnection.sendTorrentFile(path, "http://127.0.0.1:8080");
-        
-        return ResponseEntity.ok(result);
+    public ResponseEntity<Object> connectTracker(
+            @RequestParam(name = "path") String path) {
+        try {
+            String result = TrackerConnection.sendTorrentFile(path, trackerUrl);
+
+            if (result == null) {
+                return ResponseEntity.internalServerError().build();
+            }
+
+            TrackerConnection connection = ConnectionManager.createTrackerConnetion(
+                    result,
+                    trackerUrl,
+                    webServerAppCtxt.getWebServer().getPort(),
+                    path);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("magnet_text", result);
+            map.put("peers", connection.getPeers());
+            return ResponseEntity.ok(map);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(e);
+        }
+        return ResponseEntity.internalServerError().build();
     }
-    
+
+    @GetMapping("/torrent_file")
+    public ResponseEntity<Object> getFileByTorrent(
+            @RequestParam(name = "path") String path) {
+        try {
+            TrackerConnection connection = ConnectionManager.createTrackerConnetion(
+                    webServerAppCtxt.getWebServer().getPort(),
+                    path);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("peers", connection.getPeers());
+            return ResponseEntity.ok(map);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(e);
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/torrent_file")
+    public ResponseEntity<Object> getTorrentFile(
+        @RequestParam(name = "path") String uploadPath,
+        @RequestParam(name = "path") String torrentPath) {
+        try {
+            TorrentBuilder builder = new TorrentBuilder(trackerUrl);
+            byte[] data = builder.generateSingleFileTorrent(uploadPath);
+
+            BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(torrentPath));
+            out.write(data);
+            out.flush();
+            out.close();
+
+            if (data == null) {
+                return ResponseEntity.internalServerError().build();
+            }
+
+            TrackerConnection connection = ConnectionManager.createTrackerConnetion(
+                    webServerAppCtxt.getWebServer().getPort(),
+                    torrentPath);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("peers", connection.getPeers());
+            return ResponseEntity.ok(map);
+
+        } catch (Exception e) {
+            ExceptionHandler.handleException(e);
+        }
+        return ResponseEntity.internalServerError().build();
+    }
 
 }

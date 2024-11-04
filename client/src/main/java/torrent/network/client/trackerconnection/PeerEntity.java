@@ -1,5 +1,8 @@
 package torrent.network.client.trackerconnection;
 
+import java.util.Base64;
+import java.util.HexFormat;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
@@ -17,6 +20,10 @@ public class PeerEntity {
     }
     public String getPeerId() {
         return peer_id;
+    }
+
+    public byte[] getDecodedPeerId() {
+        return HexFormat.of().parseHex(this.peer_id);//TODO:
     }
     public int getPort() {
         return port;

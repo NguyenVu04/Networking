@@ -1,7 +1,6 @@
 package network.torrent.tracker.peercontroller;
 
 import java.net.InetAddress;
-import java.net.URLDecoder;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class HttpController {
     /**
      * Interval between requests in seconds.
      */
-    public static final int interval = 10;
+    public static final int interval = 3;
 
     /**
      * {@link EventHandler} for handling events.
@@ -87,25 +86,23 @@ public class HttpController {
 
         // Create a new instance of Bencode for encoding the response
         Bencode bencode = new Bencode();
-
+        
         try {
-            // Decode the infoHash from URL encoding
-            String decodedInfoHash = URLDecoder.decode(infoHash, "UTF-8");
             List<SessionDocument> sessions = null;
-
+            
             // Handle events based on the event type
             switch (event) {
                 case "started":
-                    sessions = eventHandler.handleStartedEvent(decodedInfoHash, peerId, port, ip);
+                    sessions = eventHandler.handleStartedEvent(infoHash, peerId, port, ip);
                     break;
                 case "stopped":
-                    sessions = eventHandler.handleStoppedEvent(decodedInfoHash, peerId);
+                    sessions = eventHandler.handleStoppedEvent(infoHash, peerId);
                     break;
                 case "completed":
-                    sessions = eventHandler.handleCompletedEvent(decodedInfoHash, peerId, port, ip);
+                    sessions = eventHandler.handleCompletedEvent(infoHash, peerId, port, ip);
                     break;
                 case "alive":
-                    sessions = eventHandler.handleAliveEvent(decodedInfoHash, peerId, interval, left == 0, ip);
+                    sessions = eventHandler.handleAliveEvent(infoHash, peerId, interval, left == 0, ip);
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid event type");
@@ -125,7 +122,6 @@ public class HttpController {
             }
             map.put("complete", complete);
             map.put("incomplete", incomplete);
-
             // Add peer information based on compact flag
             if (compact.intValue() == 1) {
                 // Compact mode: Use a ByteBuffer to store peer information
@@ -133,7 +129,7 @@ public class HttpController {
 
                 for (SessionDocument session : sessions) {
                     try {
-                        buffer.put(InetAddress.getByName(session.getPeerId()).getAddress());
+                        buffer.put(InetAddress.getByName(session.getIp()).getAddress());
                         buffer.putShort((short) session.getPort());
                     } catch (Exception e) {
                         throw e;
@@ -150,7 +146,7 @@ public class HttpController {
                         peer.put("peer_id", session.getPeerId());
                     peer.put("ip", session.getIp());
                     peer.put("port", session.getPort());
-
+                    
                     peers.add(peer);
                 }
                 map.put("peers", peers);
@@ -161,7 +157,7 @@ public class HttpController {
                 MessageDigest md = MessageDigest.getInstance("SHA-1");
                 String id = InetAddress.getLocalHost().getHostAddress() + (new Date()).toString();
                 md.update(id.getBytes());
-                String hashedId = new String(md.digest()); // ! ARE YOU SURE THIS IS A GOOD IDEA!!!!!
+                String hashedId = new String(md.digest());
 
                 map.put("tracker_id", hashedId);
             } else {

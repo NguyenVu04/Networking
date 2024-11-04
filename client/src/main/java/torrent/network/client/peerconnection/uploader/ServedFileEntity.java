@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.StringJoiner;
 
 import torrent.network.client.torrentbuilder.TorrentBuilder;
@@ -16,7 +18,7 @@ public class ServedFileEntity {
     private File file;
     private boolean[] pieces;
     private boolean done;
-
+    //TODO: ADD VERIFY FILE HERE
     public ServedFileEntity(String file, int numberOfPieces) throws Exception {
         this.file = new File(file);
 
@@ -65,8 +67,9 @@ public class ServedFileEntity {
             if (!this.file.mkdirs())
                 throw new IOException("Failed to create directory: " + this.file.getAbsolutePath());
 
-            this.pieces = new boolean[numberOfPieces];
-            Arrays.fill(this.pieces, false);
+            boolean[] newPieces = new boolean[numberOfPieces];
+            Arrays.fill(newPieces, false);
+            this.pieces = newPieces;
             this.done = false;
         }
     }
@@ -181,5 +184,14 @@ public class ServedFileEntity {
 
         File newFile = new File(newPath);
         newFile.renameTo(this.file);
+    }
+
+    public List<Integer> getIndexLeft() {
+        List<Integer> left = new ArrayList<>();
+        for (int i = 0; i < this.pieces.length; i++) {
+            if (!this.pieces[i])
+                left.add(i);
+        }
+        return left;
     }
 }

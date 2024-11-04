@@ -19,13 +19,13 @@ public class EventHandler {
     private List<SessionDocument> getPeerIds(String infoHash) {
         Example<SessionDocument> example = Example.of(
                 new SessionDocument(infoHash, null, 0, false, null),
-                ExampleMatcher.matching()
+                ExampleMatcher.matchingAny()
                         .withMatcher("infoHash",
                                 ExampleMatcher.GenericPropertyMatchers
                                         .exact()));
 
         List<SessionDocument> sessions = sessionRepository.findAll(example);
-
+        
         return sessions;
     }
 
@@ -49,7 +49,7 @@ public class EventHandler {
         SessionDocument newSession;
 
         if (session.isPresent()) {
-            sessionRepository.deleteById(peerId);
+            //sessionRepository.deleteById(peerId);//TODO: add this back
 
             newSession = session.get();
             newSession.setCompleted(true);
@@ -59,7 +59,7 @@ public class EventHandler {
         }
 
         List<SessionDocument> sessions = getPeerIds(infoHash);
-
+        sessions.removeIf(s -> s.getPeerId().equals(peerId));
         sessionRepository.save(newSession);
 
         return sessions;
@@ -70,15 +70,16 @@ public class EventHandler {
         SessionDocument newSession;
 
         if (session.isPresent()) {
-            sessionRepository.deleteById(peerId);
+            //sessionRepository.deleteById(peerId);//TODO: add this back
 
             newSession = session.get();
             newSession.resetCreatedAt();
+            newSession.setCompleted(false);
         } else {
             newSession = new SessionDocument(infoHash, peerId, port, completed, ip);
         }
         List<SessionDocument> sessions = getPeerIds(infoHash);
-
+        sessions.removeIf(s -> s.getPeerId().equals(peerId));
         sessionRepository.save(newSession);
 
         return sessions;

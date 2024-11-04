@@ -44,7 +44,7 @@ public class TorrentFileRepository {
 
     public byte[] getTorrentFile(String magnetText) {
         try {
-            GridFsResource[] resources = gridFsTemplate.getResources(new String(magnetText));
+            GridFsResource[] resources = gridFsTemplate.getResources(magnetText);
 
             if (resources.length == 0)
                 return null;
