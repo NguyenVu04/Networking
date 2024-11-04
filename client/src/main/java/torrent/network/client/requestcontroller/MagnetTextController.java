@@ -7,9 +7,14 @@ import torrent.network.client.torrentbuilder.TorrentBuilder;
 import torrent.network.client.torrentexception.ExceptionHandler;
 import torrent.network.client.trackerconnection.TrackerConnection;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.nio.Buffer;
+import java.security.MessageDigest;
 import java.util.HashMap;
+import java.util.HexFormat;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,31 +79,13 @@ public class MagnetTextController {
         return ResponseEntity.internalServerError().build();
     }
 
-    @GetMapping("/torrent_file")
-    public ResponseEntity<Object> getFileByTorrent(
-            @RequestParam(name = "path") String path) {
-        try {
-            TrackerConnection connection = ConnectionManager.createTrackerConnetion(
-                    webServerAppCtxt.getWebServer().getPort(),
-                    path);
-
-            Map<String, Object> map = new HashMap<>();
-            map.put("peers", connection.getPeers());
-            return ResponseEntity.ok(map);
-        } catch (Exception e) {
-            ExceptionHandler.handleException(e);
-        }
-
-        return ResponseEntity.badRequest().build();
-    }
-
     @PostMapping("/torrent_file")
-    public ResponseEntity<Object> getTorrentFile(
-        @RequestParam(name = "path") String uploadPath,
-        @RequestParam(name = "path") String torrentPath) {
+    public ResponseEntity<Object> postTorrentFile(
+            @RequestParam(name = "downloadPath") String downloadPath,
+            @RequestParam(name = "torrentPath") String torrentPath) {
         try {
             TorrentBuilder builder = new TorrentBuilder(trackerUrl);
-            byte[] data = builder.generateSingleFileTorrent(uploadPath);
+            byte[] data = builder.generateSingleFileTorrent(downloadPath);
 
             BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(torrentPath));
             out.write(data);
@@ -108,19 +95,50 @@ public class MagnetTextController {
             if (data == null) {
                 return ResponseEntity.internalServerError().build();
             }
+            HexFormat hexFormat = HexFormat.of();
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            String magnetText = hexFormat.formatHex(digest.digest(data));
 
             TrackerConnection connection = ConnectionManager.createTrackerConnetion(
-                    webServerAppCtxt.getWebServer().getPort(),
-                    torrentPath);
+                magnetText, 
+                trackerUrl, 
+                webServerAppCtxt.getWebServer().getPort(), 
+                downloadPath);
 
             Map<String, Object> map = new HashMap<>();
             map.put("peers", connection.getPeers());
+            map.put("magnet_text", magnetText);
             return ResponseEntity.ok(map);
 
         } catch (Exception e) {
             ExceptionHandler.handleException(e);
         }
         return ResponseEntity.internalServerError().build();
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<Object> getInfo(@RequestParam(name = "magnet_text") String magnetText) {
+        try {
+            String encodedInfoHash = ConnectionManager.getInfoHash(magnetText);
+
+            if (encodedInfoHash == null) {
+                return ResponseEntity.internalServerError().build();
+            }
+
+            TrackerConnection connection = ConnectionManager.getTrackerConnection(encodedInfoHash);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("downloaded", connection.getDownloaded());
+            map.put("uploaded", connection.getUploaded());
+            map.put("length", connection.getNumberOfPieces());
+
+            return ResponseEntity.ok(map);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(e);
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
 }

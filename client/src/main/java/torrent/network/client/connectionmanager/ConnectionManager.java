@@ -7,6 +7,7 @@ import torrent.network.client.trackerconnection.TrackerConnection;
 
 public class ConnectionManager {
     public static Map<String, TrackerConnection> trackerMap = new ConcurrentHashMap<>();
+    public static Map<String, String> magnetMap = new ConcurrentHashMap<>();
 
     public static TrackerConnection createTrackerConnetion(
             String magnetText,
@@ -16,19 +17,20 @@ public class ConnectionManager {
 
         TrackerConnection trackerConnection = new TrackerConnection(magnetText, trackerUrl, port, path);
         trackerMap.put(TrackerConnection.getEncodedInfoHash(trackerConnection.getInfoHash()), trackerConnection);
-        return trackerConnection;
-    }
+        magnetMap.put(magnetText, TrackerConnection.getEncodedInfoHash(trackerConnection.getInfoHash()));
 
-    public static TrackerConnection createTrackerConnetion(
-            int port,
-            String path) throws Exception {
-
-        TrackerConnection trackerConnection = new TrackerConnection(port, path);
-        trackerMap.put(TrackerConnection.getEncodedInfoHash(trackerConnection.getInfoHash()), trackerConnection);
         return trackerConnection;
     }
 
     public static TrackerConnection getTrackerConnection(byte[] infoHash) {
         return trackerMap.get(TrackerConnection.getEncodedInfoHash(infoHash));
+    }
+
+    public static TrackerConnection getTrackerConnection(String encodedInfoHash) {
+        return trackerMap.get(encodedInfoHash);
+    }
+
+    public static String getInfoHash(String magnetText) {
+        return magnetMap.get(magnetText);
     }
 }
