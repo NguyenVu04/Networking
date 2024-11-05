@@ -3,3 +3,12 @@ java.lang.UnsupportedOperationException
 java.lang.UnsupportedOperationException
 java.lang.UnsupportedOperationException
 java.lang.UnsupportedOperationException
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null

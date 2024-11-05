@@ -1,0 +1,46 @@
+package network.torrent.tracker.viewcontroller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.gridfs.GridFsResource;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import network.torrent.tracker.torrentrepository.session.SessionRepository;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+@RestController
+public class ViewController {
+    @Autowired
+    private SessionRepository peerRepo;
+
+    @Autowired
+    private GridFsTemplate gridFsTemplate;
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/stat/peers")
+    public ResponseEntity<Object> statPeers() {
+        return ResponseEntity.ok(peerRepo.findAll());
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("stat/torrents")
+    public ResponseEntity<Object> statTorrent() {
+        return ResponseEntity.ok()
+                .body(gridFsTemplate
+                        .find(new Query(Criteria.where("filename").regex(".*"))));
+    }
+
+    @GetMapping("stat/torrents/magnet")
+    public ResponseEntity<Object> getTorrentByMagnet(@RequestParam(name = "magnet_text") String magnetText) {
+        
+        GridFsResource resource = gridFsTemplate.getResource(magnetText);
+        return ResponseEntity.ok().body(resource);
+    }
+    
+}
