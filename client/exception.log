@@ -12,3 +12,653 @@ org.springframework.web.client.ResourceAccessException: I/O error on GET request
 org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
 org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
 org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [no body]
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 580 > 560
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 600 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 620 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 640 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 660 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 680 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 700 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 720 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 740 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 760 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 780 > 560
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 800 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 820 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 840 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 860 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 880 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 900 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 920 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 940 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 960 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 980 > 560
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1000 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1020 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1040 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1060 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1080 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1100 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1120 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1140 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1160 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1180 > 560
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1200 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1220 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1240 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1260 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1280 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1300 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1320 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1340 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1360 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1380 > 560
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1400 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1420 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1440 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1460 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1480 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1500 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1520 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1540 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1560 > 560
+java.io.IOException: Invalid Piece
+java.lang.IllegalArgumentException: 1580 > 560
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
+java.io.IOException: Invalid Piece
