@@ -240,8 +240,6 @@ class ClientApplicationTests {
 
 	@Test
 	public void testMergeFile() throws Exception {
-		File src = new File("D:\\symbols.pdf");
-
 		for (int i = 0; i < 256; i++) {
 			try (BufferedInputStream input = new BufferedInputStream(
 					new FileInputStream("D:\\symbols.pdf\\symbols.pdf." + i))) {

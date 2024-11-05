@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 public class MagnetTextController {
-    // @Autowired
-    // private ServletWebServerApplicationContext webServerAppCtxt;
+    @Autowired
+    private ServletWebServerApplicationContext webServerAppCtxt;
     public static final String trackerUrl = "http://localhost:8080";// ! CHANGE LATER
 
     @CrossOrigin(origins = "*")
@@ -37,8 +37,8 @@ public class MagnetTextController {
         try {
             TrackerConnection connection = ConnectionManager.createTrackerConnetion(
                     magnetText,
-                    trackerUrl, 9999,
-                    //webServerAppCtxt.getWebServer().getPort(),
+                    trackerUrl,
+                    webServerAppCtxt.getWebServer().getPort(),
                     path);
 
             Map<String, Object> map = new HashMap<>();
@@ -64,8 +64,8 @@ public class MagnetTextController {
 
             TrackerConnection connection = ConnectionManager.createTrackerConnetion(
                     result,
-                    trackerUrl, 9999,
-                    //webServerAppCtxt.getWebServer().getPort(),
+                    trackerUrl,
+                    webServerAppCtxt.getWebServer().getPort(),
                     path);
 
             Map<String, Object> map = new HashMap<>();
@@ -101,8 +101,8 @@ public class MagnetTextController {
 
             TrackerConnection connection = ConnectionManager.createTrackerConnetion(
                 magnetText, 
-                trackerUrl, 9999,
-                //webServerAppCtxt.getWebServer().getPort(), 
+                trackerUrl, 
+                webServerAppCtxt.getWebServer().getPort(), 
                 downloadPath);
 
             Map<String, Object> map = new HashMap<>();
