@@ -7,7 +7,9 @@ import torrent.network.client.torrentbuilder.TorrentBuilder;
 import torrent.network.client.torrentexception.ExceptionHandler;
 import torrent.network.client.trackerconnection.TrackerConnection;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.security.MessageDigest;
 import java.util.HashMap;
@@ -51,6 +53,7 @@ public class MagnetTextController {
 
         return ResponseEntity.notFound().build();
     }
+
     @CrossOrigin(origins = "*")
     @PostMapping("/magnet_text")
     public ResponseEntity<Object> connectTracker(
@@ -77,6 +80,7 @@ public class MagnetTextController {
         }
         return ResponseEntity.internalServerError().build();
     }
+
     @CrossOrigin(origins = "*")
     @PostMapping("/torrent_file")
     public ResponseEntity<Object> postTorrentFile(
@@ -100,10 +104,10 @@ public class MagnetTextController {
             String magnetText = hexFormat.formatHex(digest.digest(data));
 
             TrackerConnection connection = ConnectionManager.createTrackerConnetion(
-                magnetText, 
-                trackerUrl, 
-                webServerAppCtxt.getWebServer().getPort(), 
-                downloadPath);
+                    magnetText,
+                    trackerUrl,
+                    webServerAppCtxt.getWebServer().getPort(),
+                    downloadPath);
 
             Map<String, Object> map = new HashMap<>();
             map.put("peers", connection.getPeers());
@@ -115,6 +119,39 @@ public class MagnetTextController {
         }
         return ResponseEntity.internalServerError().build();
     }
+    //TODO: add torrent file here
+    @CrossOrigin(origins = "*")
+    @GetMapping("/torrent_file")
+    public ResponseEntity<Object> getFileByTorrent(
+            @RequestParam(name = "torrent_path") String torrentPath,
+            @RequestParam(name = "download_path") String downloadPath) {
+        try {
+            BufferedInputStream input = new BufferedInputStream(new FileInputStream(torrentPath));
+            byte[] data = input.readAllBytes();
+            input.close();
+
+            HexFormat hexFormat = HexFormat.of();
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            String magnetText = hexFormat.formatHex(digest.digest(data));
+
+            TrackerConnection connection = ConnectionManager.createTrackerConnetion(
+                    magnetText,
+                    trackerUrl,
+                    webServerAppCtxt.getWebServer().getPort(),
+                    downloadPath);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("peers", connection.getPeers());
+            map.put("magnet_text", magnetText);
+            return ResponseEntity.ok(map);
+
+        } catch (Exception e) {
+            ExceptionHandler.handleException(e);
+        }
+        return ResponseEntity.ok().build();
+    }
+
     @CrossOrigin(origins = "*")
     @GetMapping("/info")
     public ResponseEntity<Object> getInfo(@RequestParam(name = "magnet_text") String magnetText) {

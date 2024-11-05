@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.gridfs.model.GridFSFile;
+
 import network.torrent.tracker.torrentrepository.session.SessionRepository;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,7 +33,7 @@ public class ViewController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("stat/torrents")
+    @GetMapping("/stat/torrents")
     public ResponseEntity<Object> statTorrent() {
         return ResponseEntity.ok()
                 .body(gridFsTemplate
@@ -38,7 +41,7 @@ public class ViewController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("stat/torrents/magnet")
+    @GetMapping("/stat/torrents/magnet")
     public ResponseEntity<Object> getTorrentByMagnet(@RequestParam(name = "magnet_text") String magnetText) {
 
         GridFsResource resource = gridFsTemplate.getResource(magnetText);
@@ -46,17 +49,18 @@ public class ViewController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("stat/count")
+    @GetMapping("/stat/count")
     public ResponseEntity<Object> getTorrentCount() {
         long peerCount = peerRepo.count();
         long torrentCount = 0;
-        while (gridFsTemplate.find(
+        MongoCursor<GridFSFile> iterable = gridFsTemplate.find(
                 new Query(
                         Criteria.where("filename")
                                 .regex(".*")))
-                .iterator()
-                .hasNext()) {
+                .iterator();
+        while (iterable.hasNext()) {
             torrentCount++;
+            iterable.next();
         }
 
         Map<String, Long> map = Map.of("peer_count", peerCount, "torrent_count", torrentCount);

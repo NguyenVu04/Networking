@@ -662,3 +662,16 @@ java.lang.IllegalArgumentException: 1580 > 560
 java.io.IOException: Invalid Piece
 java.io.IOException: Invalid Piece
 java.io.IOException: Invalid Piece
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
+org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8080": null
