@@ -1,6 +1,7 @@
 package torrent.network.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,7 +18,11 @@ import torrent.network.client.peerconnection.PeerMessage;
 import torrent.network.client.peerconnection.uploader.SingleFileApp;
 import torrent.network.client.torrentbuilder.TorrentBuilder;
 import torrent.network.client.torrentdigest.TorrentDigest;
+import torrent.network.client.torrententity.SingleFileInfo;
+import torrent.network.client.torrententity.TorrentEntity;
 import torrent.network.client.torrentexception.ExceptionHandler;
+import torrent.network.client.trackerconnection.TrackerConnection;
+
 import java.security.MessageDigest;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -26,8 +31,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 @SpringBootTest
 class ClientApplicationTests {
 	@Test
@@ -90,7 +97,7 @@ class ClientApplicationTests {
 		// infoMap.put("length", info.getLength());
 		// infoMap.put("piece length", info.getPieceLength());
 		// infoMap.put("pieces", info.getPieces());
-		
+
 		// TorrentEntity entity = new TorrentEntity(infoMap, "ggggg");
 
 		// Map<String, Object> map = new HashMap<>();
@@ -116,7 +123,7 @@ class ClientApplicationTests {
 
 		Bencode bencode = new Bencode();
 		byte[] torrent = bencode.encode(paths);
-		
+
 		List<Object> decoded = bencode.decode(torrent, Type.LIST);
 
 		Gson gson = new Gson();
@@ -133,22 +140,26 @@ class ClientApplicationTests {
 
 	// @Test
 	// public void testGetTorrentFile() throws Exception {
-	// 	TrackerConnection connection = new TrackerConnection("symbols.pdf", "127.0.0.1:8080", 9000);
-	// 	assertTrue(connection.isAlive());
+	// TrackerConnection connection = new TrackerConnection("symbols.pdf",
+	// "127.0.0.1:8080", 9000);
+	// assertTrue(connection.isAlive());
 	// }
 
 	// @Test
 	// public void testSendTorrentFile() throws Exception {
-	// 	String result = TrackerConnection.sendTorrentFile("D:\\Project\\symbols.pdf", "http://127.0.0.1:8080");
-	// 	System.err.println(result);
-	// 	assertNotNull(result);
+	// String result = TrackerConnection.sendTorrentFile("D:\\Project\\symbols.pdf",
+	// "http://127.0.0.1:8080");
+	// System.err.println(result);
+	// assertNotNull(result);
 	// }
 
 	// @Test
 	// public void getSendTorrentFile() throws Exception {
-	// 	TrackerConnection result = new TrackerConnection("84a2771d52b9269690be3217a35b5b3c9b1aaa4bf35143ba47ecde26948d07b5", "http://127.0.0.1:8080", 9000);
-	// 	//result.aliveThread.join();
-	// 	assertTrue(result.isAlive());		
+	// TrackerConnection result = new
+	// TrackerConnection("84a2771d52b9269690be3217a35b5b3c9b1aaa4bf35143ba47ecde26948d07b5",
+	// "http://127.0.0.1:8080", 9000);
+	// //result.aliveThread.join();
+	// assertTrue(result.isAlive());
 	// }
 
 	@Test
@@ -164,7 +175,6 @@ class ClientApplicationTests {
 		MessageType messageType = PeerMessage.getMessageType(message);
 		assertEquals(MessageType.HANDSHAKE, messageType);
 		assertTrue(Arrays.equals(infoHash, PeerMessage.getInfoHash(message)));
-		
 
 		byte[] message2 = PeerMessage.createKeepAliveMessage();
 		MessageType messageType2 = PeerMessage.getMessageType(message2);
@@ -190,9 +200,9 @@ class ClientApplicationTests {
 		MessageType messageType7 = PeerMessage.getMessageType(message7);
 		assertEquals(MessageType.HAVE, messageType7);
 
-		//byte[] message8 = PeerMessage.createRequestMessage(1, 1, 1);
-		//MessageType messageType8 = PeerMessage.getMessageType(message8);
-		//assertEquals(MessageType.REQUEST, messageType8);
+		// byte[] message8 = PeerMessage.createRequestMessage(1, 1, 1);
+		// MessageType messageType8 = PeerMessage.getMessageType(message8);
+		// assertEquals(MessageType.REQUEST, messageType8);
 
 		byte[] message9 = PeerMessage.createPieceMessage(1, 1, new byte[1]);
 		MessageType messageType9 = PeerMessage.getMessageType(message9);
@@ -216,7 +226,8 @@ class ClientApplicationTests {
 			File file = new File("D:\\symbols.pdf");
 			file.mkdirs();
 			while ((byteRead = input.read(buffer, 0, buffer.length)) != -1) {
-				try (BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream("D:\\symbols.pdf\\symbols.pdf." + i, false))) {
+				try (BufferedOutputStream output = new BufferedOutputStream(
+						new FileOutputStream("D:\\symbols.pdf\\symbols.pdf." + i, false))) {
 					output.write(buffer, 0, byteRead);
 					output.flush();
 					i++;
@@ -232,12 +243,14 @@ class ClientApplicationTests {
 		File src = new File("D:\\symbols.pdf");
 
 		for (int i = 0; i < 256; i++) {
-			try (BufferedInputStream input = new BufferedInputStream(new FileInputStream("D:\\symbols.pdf\\symbols.pdf." + i))) {
-				try (BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream("D:\\symbols1.pdf", true))) {
+			try (BufferedInputStream input = new BufferedInputStream(
+					new FileInputStream("D:\\symbols.pdf\\symbols.pdf." + i))) {
+				try (BufferedOutputStream output = new BufferedOutputStream(
+						new FileOutputStream("D:\\symbols1.pdf", true))) {
 					byte[] buffer = input.readAllBytes();
 					output.write(buffer);
 				}
-				
+
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
@@ -253,5 +266,49 @@ class ClientApplicationTests {
 		Arrays.equals(arr1, PeerMessage.getInfoHash(arr1));
 		Arrays.equals(arr2, PeerMessage.getPeerId(arr2));
 
+	}
+
+	@Test
+	public void createTorrent() throws Exception {
+		TorrentBuilder builder = new TorrentBuilder("http://example.com/announce");
+		byte[] data = builder.generateSingleFileTorrent("D:\\Books\\Coding\\WebAssembly in Action.pdf");
+
+		Bencode bencode = new Bencode();
+		TorrentEntity entity = TorrentEntity.from(bencode.decode(data, Type.DICTIONARY));
+
+		SingleFileInfo info = entity.getSingleFileInfo();
+
+		byte[] pieces = info.getPieces();
+
+		BufferedInputStream input = new BufferedInputStream(
+				new FileInputStream("D:\\Books\\Coding\\WebAssembly in Action.pdf"));
+		input.skip(TorrentBuilder.pieceSize * 5);
+
+		byte[] buffer = input.readNBytes(TorrentBuilder.pieceSize);
+		input.close();
+		TorrentDigest td = new TorrentDigest(pieces);
+
+		assertTrue(td.verify(buffer, 5));
+	}
+
+	@Test
+	public void testSingleFileApp() throws Exception {
+		TorrentBuilder builder = new TorrentBuilder("http://localhost:8080");
+		byte[] data = builder.generateSingleFileTorrent("D:\\Books\\Coding\\WebAssembly in Action.pdf");
+		Bencode bencode = new Bencode();
+		Map<String, Object> map = bencode.decode(data, Type.DICTIONARY);
+		TorrentEntity entity = TorrentEntity.from(map);
+
+		SingleFileApp.serveFile("D:\\Books\\Coding\\WebAssembly in Action.pdf",
+				TrackerConnection.getEncodedInfoHash(TorrentEntity.getInfoHash(entity.getInfo())),
+				entity.getSingleFileInfo()
+						.getNumberOfPieces(),
+				entity.getSingleFileInfo()
+						.getPieces());
+
+		byte[] bitfield = SingleFileApp.getBitField(TrackerConnection.getEncodedInfoHash(TorrentEntity.getInfoHash(entity.getInfo())));
+		for (byte bit : bitfield) {
+			assertNotEquals(bit, 0);
+		}
 	}
 }

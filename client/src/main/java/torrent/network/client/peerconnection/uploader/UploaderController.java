@@ -59,12 +59,9 @@ public class UploaderController {
             }
             
             byte[] piece = SingleFileApp.getPiece(
-                TrackerConnection.getEncodedInfoHash(infoHash), index);
-
-            // TorrentDigest td = new TorrentDigest(connection.getPieces());
-            // if (!td.verify(piece, index)) {
-            //     return ResponseEntity.internalServerError().build();
-            // }
+                TrackerConnection.getEncodedInfoHash(infoHash), 
+                index, 
+                connection.getPieces());
 
             connection.increaseUploaded();
 

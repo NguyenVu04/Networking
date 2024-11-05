@@ -43,4 +43,9 @@ public class TorrentController {
                 .body(data);
     }
     
+    @GetMapping("/hello")
+    public String getMethodName() {
+        return "Hello World!";
+    }
+    
 }

@@ -1,6 +1,5 @@
 package torrent.network.client.torrententity;
 
-import java.util.Base64;
 import java.util.HexFormat;
 import java.util.Map;
 
@@ -12,7 +11,7 @@ import torrent.network.client.torrentexception.ExceptionHandler;
 
 public class SingleFileInfo {
     private String name;
-    private int length;
+    private long length;
     private int piece_length;
     private String pieces;
 
@@ -23,7 +22,7 @@ public class SingleFileInfo {
         return name;
     }
 
-    public int getLength() {
+    public long getLength() {
         return length;
     }
 
@@ -32,7 +31,7 @@ public class SingleFileInfo {
     }
 
     public byte[] getPieces() {
-        return HexFormat.of().parseHex(this.pieces);//TODO:
+        return HexFormat.of().parseHex(this.pieces);
     }
 
     public static SingleFileInfo from(Map<String, Object> info) {
@@ -50,6 +49,6 @@ public class SingleFileInfo {
     }
 
     public int getNumberOfPieces() {
-        return this.length / TorrentBuilder.pieceSize + 1;
+        return (int) this.length / TorrentBuilder.pieceSize + 1;
     }
 }

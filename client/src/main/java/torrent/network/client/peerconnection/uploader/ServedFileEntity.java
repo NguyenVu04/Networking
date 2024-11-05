@@ -12,23 +12,39 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import torrent.network.client.torrentbuilder.TorrentBuilder;
+import torrent.network.client.torrentdigest.TorrentDigest;
 import torrent.network.client.torrentexception.ExceptionHandler;
 
 public class ServedFileEntity {
     private File file;
     private boolean[] pieces;
     private boolean done;
-    //TODO: ADD VERIFY FILE HERE
-    public ServedFileEntity(String file, int numberOfPieces) throws Exception {
+
+    public ServedFileEntity(String file, int numberOfPieces, byte[] pieces) throws Exception {
         this.file = new File(file);
 
         if (this.file.exists() && this.file.isFile()) {
+
+            BufferedInputStream input = new BufferedInputStream(new FileInputStream(file));
+            byte[] piece;
+            TorrentDigest td = new TorrentDigest(pieces);
+            int index = 0;
+            while ((piece = input.readNBytes(TorrentBuilder.pieceSize)).length > 0) {
+                if (!td.verify(piece, index)) {
+                    input.close();
+                    throw new IOException("Invalid Piece");
+                }
+                index++;
+            }
+            input.close();
 
             this.pieces = new boolean[numberOfPieces];
             Arrays.fill(this.pieces, true);
             this.done = true;
 
         } else if (this.file.exists()) {
+            TorrentDigest td = new TorrentDigest(pieces);
+
             File[] files = this.file.listFiles();
             this.done = false;
 
@@ -48,6 +64,16 @@ public class ServedFileEntity {
                     if (name.equals(this.file.getName())) {
                         try {
                             int index = Integer.parseInt(pieceName[pieceName.length - 1]);
+
+                            BufferedInputStream input = new BufferedInputStream(new FileInputStream(filePiece));
+                            byte[] piece = input.readNBytes(TorrentBuilder.pieceSize);
+                            if (!td.verify(piece, index)) {
+                                ExceptionHandler.handleException(new IOException("Invalid Piece"));
+                                input.close();
+                                continue;
+                            }
+                            input.close();
+
                             this.pieces[index] = true;
                         } catch (Exception e) {
                             ExceptionHandler.handleException(e);
@@ -131,12 +157,17 @@ public class ServedFileEntity {
         return bitfield;
     }
 
-    public void savePiece(int index, byte[] piece) throws Exception {
+    public boolean savePiece(int index, byte[] piece, byte[] pieces) throws Exception {
         if (index < 0 || index >= this.pieces.length)
             throw new IOException("Index out of range: " + index);
-
+            
         if (this.done)
-            return;
+            return true;
+        
+        TorrentDigest td = new TorrentDigest(pieces);
+        if (!td.verify(piece, index)) { 
+            return false;
+        }
 
         try (BufferedOutputStream output = new BufferedOutputStream(
                 new FileOutputStream(this.file.getAbsolutePath() +
@@ -147,16 +178,17 @@ public class ServedFileEntity {
             output.flush();
 
             this.pieces[index] = true;
-
+            
             for (int i = 0; i < this.pieces.length; i++) {
                 if (!this.pieces[i]) {
                     this.done = false;
-                    return;
+                    return true;
                 }
             }
         }
 
         this.mergeFiles();
+        return true;
     }
 
     private void mergeFiles() {
@@ -189,8 +221,10 @@ public class ServedFileEntity {
     public List<Integer> getIndexLeft() {
         List<Integer> left = new ArrayList<>();
         for (int i = 0; i < this.pieces.length; i++) {
-            if (!this.pieces[i])
+            if (!this.pieces[i]) {
                 left.add(i);
+            }
+                
         }
         return left;
     }

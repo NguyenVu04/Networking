@@ -12,7 +12,6 @@ import org.springframework.web.client.RestClient;
 import torrent.network.client.connectionmanager.ConnectionManager;
 import torrent.network.client.peerconnection.PeerMessage;
 import torrent.network.client.peerconnection.uploader.SingleFileApp;
-// import torrent.network.client.torrentdigest.TorrentDigest;
 import torrent.network.client.torrentexception.ExceptionHandler;
 import torrent.network.client.trackerconnection.PeerEntity;
 import torrent.network.client.trackerconnection.TrackerConnection;
@@ -60,17 +59,21 @@ public class LeecherController {
             }
         }
 
-        TreeMap<Integer, Integer> sortedMap = new TreeMap<>();
+        Map<Integer, Integer> temp = new HashMap<>();
         for (Integer index : indexLeft) {
-            sortedMap.put(peerMap.get(index).size(), index);
+            temp.put(index, peerMap.get(index).size());
         }
-
-        for (Map.Entry<Integer, Integer> entry : sortedMap.entrySet()) {
-            requestQueue.add(entry.getValue());
+        
+        List<Map.Entry<Integer, Integer>> list = new LinkedList<>(temp.entrySet());
+        list.sort((a, b) -> a.getValue() > b.getValue() ? 1 : 0);
+        
+        for (Map.Entry<Integer, Integer> entry : list) {
+            requestQueue.add(entry.getKey());
         }
 
         while (!requestQueue.isEmpty()) {
             int index = requestQueue.removeFirst();
+
             byte[] message = PeerMessage.createRequestMessage(infoHash, peerId, index);
             while (!peerMap.get(index).isEmpty()) {
                 PeerEntity peer = peerMap.get(index).removeFirst();
@@ -85,13 +88,12 @@ public class LeecherController {
 
                     byte[] data = response.getBody();
 
-                    // TorrentDigest td = new TorrentDigest(pieces);
-                    // if (!td.verify(data, index)) {
-                    //     System.out.println("Failed to verify piece " + index);
-                    //     continue;
-                    // }
+                    if (!SingleFileApp.savePiece(
+                            TrackerConnection.getEncodedInfoHash(infoHash),
+                            index, data, pieces)) {
 
-                    SingleFileApp.savePiece(TrackerConnection.getEncodedInfoHash(infoHash), index, data);
+                        continue;
+                    }
 
                     ConnectionManager.getTrackerConnection(infoHash).increaseDownloaded();
                 } catch (Exception e) {

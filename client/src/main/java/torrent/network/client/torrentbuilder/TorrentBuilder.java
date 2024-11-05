@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.HexFormat;
 import java.util.List;
@@ -22,7 +21,7 @@ import torrent.network.client.torrentexception.ExceptionHandler;
  * Class for generating .torrent files from directories or single files.
  * Uses SHA-1 hashing for piece hashing.
  * 
- * @author DampCake
+ * @author NguyenVu
  */
 public class TorrentBuilder {
     /**
@@ -235,7 +234,7 @@ public class TorrentBuilder {
         HashMap<Object, Object> info = new HashMap<>();
         info.put("piece_length", TorrentBuilder.pieceSize);
 
-        String encodedPieces = HexFormat.of().formatHex(pieces);//TODO:
+        String encodedPieces = HexFormat.of().formatHex(pieces);
         info.put("pieces", encodedPieces);
 
         File file = new File(filePath);

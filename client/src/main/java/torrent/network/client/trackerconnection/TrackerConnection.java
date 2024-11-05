@@ -6,7 +6,6 @@ import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HexFormat;
 import java.util.List;
@@ -36,7 +35,7 @@ public class TrackerConnection {
     private long uploaded;
     private int port;
     private byte[] infoHash;
-    private byte[] infoPieces;
+    private byte[] info;
     private String trackerUrl;
     private List<PeerEntity> peers;
     public static final String torrentPath = "torrent";
@@ -66,8 +65,8 @@ public class TrackerConnection {
         this.left = singleFileInfo.getLength();
 
         this.trackerUrl = torrentEntity.getAnnounce();
-        this.infoPieces = torrentEntity.getInfo();
-        this.infoHash = TorrentEntity.getInfoHash(this.infoPieces);
+        this.info = torrentEntity.getInfo();
+        this.infoHash = TorrentEntity.getInfoHash(this.info);
 
         String encodedInfoHash = TrackerConnection.getEncodedInfoHash(this.infoHash);
         String ip = InetAddress.getLocalHost().getHostAddress();
@@ -82,7 +81,7 @@ public class TrackerConnection {
             this.peers.addAll(peerList);
         }
 
-        SingleFileApp.serveFile(path, encodedInfoHash, this.getNumberOfPieces());
+        SingleFileApp.serveFile(path, encodedInfoHash, this.getNumberOfPieces(), this.getPieces());
         List<Integer> indexLeft = SingleFileApp.getIndexOfPiecesLeft(encodedInfoHash);
         this.left = indexLeft.size() * TorrentBuilder.pieceSize;
 
@@ -97,7 +96,7 @@ public class TrackerConnection {
                     } else {
                         this.sendAliveEvent();
                         LeecherController.createLeecherController(
-                                this.infoPieces,
+                                this.getPieces(),
                                 this.infoHash,
                                 this.peerId,
                                 this.peers,
@@ -133,8 +132,8 @@ public class TrackerConnection {
         this.left = singleFileInfo.getLength();
 
         this.trackerUrl = torrentEntity.getAnnounce();
-        this.infoPieces = torrentEntity.getInfo();
-        this.infoHash = TorrentEntity.getInfoHash(this.infoPieces);
+        this.info = torrentEntity.getInfo();
+        this.infoHash = TorrentEntity.getInfoHash(this.getInfo());
 
         String encodedInfoHash = TrackerConnection.getEncodedInfoHash(this.infoHash);
         String ip = InetAddress.getLocalHost().getHostAddress();
@@ -149,7 +148,7 @@ public class TrackerConnection {
             this.peers.addAll(peerList);
         }
 
-        SingleFileApp.serveFile(path, encodedInfoHash, this.getNumberOfPieces());
+        SingleFileApp.serveFile(path, encodedInfoHash, this.getNumberOfPieces(), this.getPieces());
         List<Integer> indexLeft = SingleFileApp.getIndexOfPiecesLeft(encodedInfoHash);
         this.left = indexLeft.size() * TorrentBuilder.pieceSize;
 
@@ -164,7 +163,7 @@ public class TrackerConnection {
                     } else {
                         this.sendAliveEvent();
                         LeecherController.createLeecherController(
-                                this.infoPieces,
+                                this.getPieces(),
                                 this.infoHash,
                                 this.peerId,
                                 this.peers,
@@ -235,8 +234,8 @@ public class TrackerConnection {
                     .build();
 
             String ip = InetAddress.getLocalHost().getHostAddress();
-            String encodedInfoHash = HexFormat.of().formatHex(this.infoHash);// TODO:
-            String encodedPeerId = HexFormat.of().formatHex(this.peerId);// TODO:
+            String encodedInfoHash = HexFormat.of().formatHex(this.infoHash);
+            String encodedPeerId = HexFormat.of().formatHex(this.peerId);
 
             ResponseEntity<byte[]> response = request.get()
                     .uri(uriBuilder -> uriBuilder.queryParam("info_hash", encodedInfoHash)
@@ -353,7 +352,7 @@ public class TrackerConnection {
     }
 
     public byte[] getInfo() {
-        return this.infoPieces;
+        return this.info;
     }
 
     public int getNumberOfPieces() {
@@ -361,8 +360,8 @@ public class TrackerConnection {
     }
 
     public boolean peerInSwarm(byte[] infoHash, byte[] peerId) {
-        String encodedInfoHash = HexFormat.of().formatHex(infoHash);// TODO:
-        String encodedPeerId = HexFormat.of().formatHex(peerId);// TODO:
+        String encodedInfoHash = HexFormat.of().formatHex(infoHash);
+        String encodedPeerId = HexFormat.of().formatHex(peerId);
 
         RestClient client = RestClient.create(this.trackerUrl);
 
@@ -390,10 +389,10 @@ public class TrackerConnection {
     }
 
     public byte[] getPieces() {
-        return this.infoPieces;
+        return this.singleFileInfo.getPieces();
     }
 
     public static String getEncodedInfoHash(byte[] infoHash) {
-        return HexFormat.of().formatHex(infoHash);// TODO:
+        return HexFormat.of().formatHex(infoHash);
     }
 }

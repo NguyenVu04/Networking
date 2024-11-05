@@ -7,11 +7,8 @@ import torrent.network.client.torrentbuilder.TorrentBuilder;
 import torrent.network.client.torrentexception.ExceptionHandler;
 import torrent.network.client.trackerconnection.TrackerConnection;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.nio.Buffer;
 import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.HexFormat;
@@ -20,16 +17,18 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 public class MagnetTextController {
-    @Autowired
-    private ServletWebServerApplicationContext webServerAppCtxt;
+    // @Autowired
+    // private ServletWebServerApplicationContext webServerAppCtxt;
     public static final String trackerUrl = "http://localhost:8080";// ! CHANGE LATER
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/magnet_text")
     public ResponseEntity<Object> getFileByMagnetText(
             @RequestParam(name = "magnet_text") String magnetText,
@@ -38,8 +37,8 @@ public class MagnetTextController {
         try {
             TrackerConnection connection = ConnectionManager.createTrackerConnetion(
                     magnetText,
-                    trackerUrl,
-                    webServerAppCtxt.getWebServer().getPort(),
+                    trackerUrl, 9999,
+                    //webServerAppCtxt.getWebServer().getPort(),
                     path);
 
             Map<String, Object> map = new HashMap<>();
@@ -52,7 +51,7 @@ public class MagnetTextController {
 
         return ResponseEntity.notFound().build();
     }
-
+    @CrossOrigin(origins = "*")
     @PostMapping("/magnet_text")
     public ResponseEntity<Object> connectTracker(
             @RequestParam(name = "path") String path) {
@@ -65,8 +64,8 @@ public class MagnetTextController {
 
             TrackerConnection connection = ConnectionManager.createTrackerConnetion(
                     result,
-                    trackerUrl,
-                    webServerAppCtxt.getWebServer().getPort(),
+                    trackerUrl, 9999,
+                    //webServerAppCtxt.getWebServer().getPort(),
                     path);
 
             Map<String, Object> map = new HashMap<>();
@@ -78,7 +77,7 @@ public class MagnetTextController {
         }
         return ResponseEntity.internalServerError().build();
     }
-
+    @CrossOrigin(origins = "*")
     @PostMapping("/torrent_file")
     public ResponseEntity<Object> postTorrentFile(
             @RequestParam(name = "downloadPath") String downloadPath,
@@ -102,8 +101,8 @@ public class MagnetTextController {
 
             TrackerConnection connection = ConnectionManager.createTrackerConnetion(
                 magnetText, 
-                trackerUrl, 
-                webServerAppCtxt.getWebServer().getPort(), 
+                trackerUrl, 9999,
+                //webServerAppCtxt.getWebServer().getPort(), 
                 downloadPath);
 
             Map<String, Object> map = new HashMap<>();
@@ -116,7 +115,7 @@ public class MagnetTextController {
         }
         return ResponseEntity.internalServerError().build();
     }
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/info")
     public ResponseEntity<Object> getInfo(@RequestParam(name = "magnet_text") String magnetText) {
         try {
